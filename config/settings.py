@@ -41,19 +41,12 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-{% if facebook or google %}
-{% if facebook %}
     'allauth.socialaccount.providers.facebook',  # enabled by configure
-{% endif %}
-{% if google %}
     'allauth.socialaccount.providers.google',  # enabled by configure
-{% endif %}
     #'allauth.socialaccount.providers.dropbox',
     #'allauth.socialaccount.providers.github',
     #'allauth.socialaccount.providers.linkedin',
     # etc
-{% endif %}
-
     'allauthdemo.auth',
     'allauthdemo.demo',
 )
