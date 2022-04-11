@@ -1,12 +1,4 @@
-*.pyc
-*.tmp
-*.swp
-*.db
-*.sqlite3
-*/settings_*.py
-*.iml
-.idea
-DEL
-*.sql
-*.bak
-mypy*
+bin/
+lib/
+pyvenv.cfg
+__pycache__
