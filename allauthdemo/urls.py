@@ -16,13 +16,13 @@ Including another URLconf
 from django.urls import include, path
 from django.contrib import admin
 from django.views.generic import TemplateView
-from django.conf.paths.static import static
+from django.conf.urls.static import static
 from django.conf import settings
 
 from .auth.views import account_profile
 from .views import member_index, member_action
 
-pathpatterns = [
+urlpatterns = [
     # Landing page area
     path(
         "",
@@ -45,11 +45,11 @@ pathpatterns = [
         name="website_contact",
     ),
     # Account management is done by allauth
-    path("accounts/", include("allauth.paths")),
+    path("accounts/", include("allauth.urls")),
     # Account profile and member info done locally
     path("accounts/profile/", account_profile, name="account_profile"),
     path("member/", member_index, name="user_home"),
     path("member/action", member_action, name="user_action"),
     # Usual Django admin
-    path("admin/", admin.site.paths),
+    path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
