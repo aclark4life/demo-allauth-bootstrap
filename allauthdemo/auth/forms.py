@@ -16,13 +16,21 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'display_name')
+        fields = ("first_name", "last_name", "display_name")
 
 
 class UserAdminForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'display_name', 'is_staff', 'is_active', 'date_joined')
+        fields = (
+            "email",
+            "first_name",
+            "last_name",
+            "display_name",
+            "is_staff",
+            "is_active",
+            "date_joined",
+        )
 
     def is_valid(self):
         return super().is_valid()

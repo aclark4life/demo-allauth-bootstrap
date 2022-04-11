@@ -14,7 +14,7 @@ class MyModelInstanceMixin(FormMixin):
         kwargs = super(MyModelInstanceMixin, self).get_form_kwargs()
         instance = self.get_model_instance()
         if instance:
-            kwargs.update({'instance': instance})
+            kwargs.update({"instance": instance})
         return instance
 
 
@@ -30,16 +30,17 @@ class UserEditView(UpdateView):
     Django generic view ``UpdateView``, specifically the
     ``get_object`` method.
     """
+
     form_class = UserEditForm
     template_name = "auth/profile.html"
-    view_name = 'account_profile'
+    view_name = "account_profile"
     success_url = reverse_lazy(view_name)
 
     def get_object(self):
         return self.request.user
 
     def form_valid(self, form):
-        messages.add_message(self.request, messages.INFO, 'User profile updated')
+        messages.add_message(self.request, messages.INFO, "User profile updated")
         return super(UserEditView, self).form_valid(form)
 
 

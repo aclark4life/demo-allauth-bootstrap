@@ -39,7 +39,7 @@ include base.mk
 #
 #
 # Uncomment the next line to customize the project name variable
-#PROJECT_NAME := project
+PROJECT_NAME := allauthdemo
 #
 # Uncomment the next line to customize the commit message variable
 #GIT_COMMIT := update

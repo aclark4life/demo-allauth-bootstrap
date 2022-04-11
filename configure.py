@@ -19,14 +19,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # TEMPLATES structure changed in Django 1.10
 settings.configure(
     DEBUG=True,
-    TEMPLATES=[dict(
-        # DEBUG = True,
-        BACKEND='django.template.backends.django.DjangoTemplates',
-        APP_DIRS=True,
-        DIRS=[
-            os.path.join(BASE_DIR, 'config'),
-        ],
-    )],
+    TEMPLATES=[
+        dict(
+            # DEBUG = True,
+            BACKEND="django.template.backends.django.DjangoTemplates",
+            APP_DIRS=True,
+            DIRS=[
+                os.path.join(BASE_DIR, "config"),
+            ],
+        )
+    ],
 )
 
 try:
@@ -37,7 +39,8 @@ except AttributeError:
 from django.template.loader import get_template
 from django.template import engines  # Django >= 1.11
 
-commands_template = engines['django'].from_string("""
+commands_template = engines["django"].from_string(
+    """
 Run these commands:
 
     python manage.py makemigrations allauthdemo_auth
@@ -58,26 +61,27 @@ Finally:
 
 Load http://127.0.0.1:8000/ in your browser.
 
-""")
+"""
+)
 
 settings_template = get_template("settings.template.py")
 
 
 def heading(text):
     text = text.strip()
-    line = '-' * len(text)
+    line = "-" * len(text)
     print("\n%s\n%s\n%s\n" % (line, text, line))
 
 
 def ask_yes_no(msg):
-    msg = "\n" + msg.strip() + ' (y/n): '
+    msg = "\n" + msg.strip() + " (y/n): "
     confirm = input(msg)
     while True:
         confirm = confirm.strip().lower()
-        if confirm not in ('yes', 'y', 'no', 'n'):
+        if confirm not in ("yes", "y", "no", "n"):
             confirm = input('Please enter y or n (or "yes" or "no"): ')
             continue
-        return confirm in ('yes', 'y')
+        return confirm in ("yes", "y")
 
 
 def ask_text(need, default=None):
@@ -112,22 +116,26 @@ def ask_google():
 if __name__ == "__main__":
 
     context = {
-        'now': str(datetime.now()),
-        'secret_key': get_random_secret_key(),
+        "now": str(datetime.now()),
+        "secret_key": get_random_secret_key(),
     }
 
     heading("Facebook")
-    if ask_yes_no("Do you want to configure auth via Facebook?\n"
-                  "You'll need the app secret and client."):
-        context['facebook'] = ask_facebook()
+    if ask_yes_no(
+        "Do you want to configure auth via Facebook?\n"
+        "You'll need the app secret and client."
+    ):
+        context["facebook"] = ask_facebook()
 
     heading("Google")
-    if ask_yes_no("Do you want to configure auth via Google?\n"
-                  "You'll need the app secret and client."):
-        context['google'] = ask_google()
+    if ask_yes_no(
+        "Do you want to configure auth via Google?\n"
+        "You'll need the app secret and client."
+    ):
+        context["google"] = ask_google()
 
     heading("Rendering settings...")
-    with open('config/settings.py', 'w') as out:
+    with open("config/settings.py", "w") as out:
         out.write(settings_template.render(context, request=None))
     print("OK")
 
