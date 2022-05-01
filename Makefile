@@ -49,3 +49,6 @@ PROJECT_NAME := config
 #
 # Uncomment the next line to customize the default goal
 .DEFAULT_GOAL := git-commit-push
+
+django-serve:
+	python manage.py runserver
